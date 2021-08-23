@@ -1,4 +1,4 @@
-## SiCES - Sistema de Gerenciamento de Entrada e Saida
+## SiGES - Sistema de Gerenciamento de Entrada e Saida
 
 <br>
 

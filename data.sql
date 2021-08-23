@@ -1,6 +1,6 @@
-CREATE DATABASE dev_sices;
+CREATE DATABASE dev_siges;
 
-USE dev_sices;
+USE dev_siges;
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY, 
