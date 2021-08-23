@@ -1,30 +1,74 @@
 <?php
 
-class Model {
+require_once(realpath(dirname(__FILE__) . '/../config/config.php'));
 
-    protected static $tableName = '';
+class Model extends Database
+{
+
+    protected static $table = "";
     protected static $columns = [];
     protected $values = [];
 
-    public function __construct($data)
+    public function find(int $id)
     {
-        $this->loadData($data);
+        try {
+            $query = "SELECT * FROM " . static::$table . " WHERE id = :id";
+
+            $result = $this->connection->prepare($query);
+            $result->bindParam(':id', $id, PDO::PARAM_INT);
+            $result->execute();
+
+            $data = $result->fetch(PDO::FETCH_ASSOC);
+            if (!isset($data)) {
+                return false;
+            }
+
+            return $data;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
     }
 
-    public function loadData($data) {
-        if($data) {
-            foreach($data as $key => $value) {
-                $this->$key = $value;
+    public function findAll()
+    {
+        try {
+            $query = "SELECT * FROM " . static::$table;
+
+            $result = $this->connection->prepare($query);
+            $result->execute();
+
+            $data = [];
+            if($result) {
+                $calledClass = get_called_class();
+                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $class = new $calledClass();
+                    $class->loadData($row);
+                    array_push($data, $class);
+                }
+            }
+
+            return $data;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function loadData($data)
+    {
+        if ($data) {
+            foreach ($data as $key => $value) {
+                $this->values[$key] = $value;
             }
         }
     }
 
-    public function __get($key) {
+    public function getValue($key)
+    {
         return $this->values[$key];
     }
 
-    public function __set($key, $value) {
+    public function setValue($key, $value)
+    {
         $this->values[$key] = $value;
     }
-
 }

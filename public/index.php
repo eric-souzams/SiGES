@@ -8,9 +8,12 @@ $payload = [
     'email' => 'lucas.pinto@gmail.com'
 ];
 
-$user = new User($payload);
+$user = new User();
 
-print_r($user);
-echo '<br>';
+$result = $user->findAll();
 
-echo $user->name;
+foreach($result as $user) {
+    print_r($user);
+    echo '<br>';
+    echo '<br>';
+}
