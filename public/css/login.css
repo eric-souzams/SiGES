@@ -1,0 +1,21 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue);
+}
+
+.form-login {
+    flex-basis: 480px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card-footer .btn-custom {
+    width: 100%;
+}

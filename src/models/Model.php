@@ -9,6 +9,26 @@ class Model extends Database
     protected static $columns = [];
     protected $values = [];
 
+    public function findByEmail(string $email)
+    {
+        try {
+            $query = "SELECT * FROM " . static::$table . " WHERE email = :email";
+
+            $result = $this->connection->prepare($query);
+            $result->bindParam(':email', $email, PDO::PARAM_STR);
+            $result->execute();
+
+            $data = $result->fetch(PDO::FETCH_ASSOC);
+            if (!isset($data)) {
+                return false;
+            }
+
+            return $data;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function find(int $id)
     {
         try {
@@ -38,9 +58,9 @@ class Model extends Database
             $result->execute();
 
             $data = [];
-            if($result) {
+            if ($result) {
                 $calledClass = get_called_class();
-                while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                     $class = new $calledClass();
                     $class->loadData($row);
                     array_push($data, $class);

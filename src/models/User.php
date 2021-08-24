@@ -1,6 +1,6 @@
 <?php
 
-require_once(realpath(MODEL_PATH) . '/Model.php');
+loadModel('User');
 
 class User extends Model {
 
