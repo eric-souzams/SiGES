@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/comum.css">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./resources/css/comum.css">
+    <link rel="stylesheet" href="./resources/css/login.css">
 
     <title>::. SiGES .::</title>
 </head>
 
 <body>
-    <form class="form-login" action="#" method="post">
+    <form class="form-login" action="app/Controllers/LoginController.php" method="post">
         <div class="card login-card">
             <div class="card-header font-weight-bold">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
@@ -26,20 +25,23 @@
                 </span>
             </div>
             <div class="card-body">
-                <?php include(TEMPLATE_PATH . '/messages.php') ?>
+                <?php 
+                    $exception = null;
+                    include('./template/messages.php')
+                ?>
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input 
                         type="email" 
                         name="email" 
                         id="email" 
-                        class="form-control <?= isset($errors['email']) && $errors['email'] ? 'is-invalid' : '' ?>" 
+                        class="form-control <?= isset($_GET['email_validation']) ? 'is-invalid' : '' ?>" 
                         placeholder="Digite seu e-mail" 
                         value="<?= isset($_POST['email']) ? $_POST['email'] : '' ?>" 
                         autofocus
                     >
                     <div class="invalid-feedback">
-                        <?= isset($errors['email']) ? $errors['email'] : ''?>
+                        <?= isset($_GET['email_validation']) && $_GET['email_validation'] == 'true' ? 'E-mail é um campo obrigatorio.' : ''?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -48,13 +50,14 @@
                         type="password" 
                         name="password" 
                         id="password" 
-                        class="form-control <?= isset($errors['password']) && $errors['password'] ? 'is-invalid' : '' ?>" 
+                        class="form-control <?= isset($_GET['password_validation']) ? 'is-invalid' : '' ?>" 
                         placeholder="Digite sua senha"
                     >
                     <div class="invalid-feedback">
-                        <?= isset($errors['password']) ? $errors['password'] : ''?>
+                        <?= isset($_GET['password_validation']) && $_GET['password_validation'] == 'true' ? 'Senha é um campo obrigatorio.': ''?>
                     </div>
                 </div>
+                <input type="hidden" name="loginMethod" value="login">
             </div>
             <div class="card-footer">
                 <button class="btn btn-xl btn-primary btn-custom">Entrar</button>
