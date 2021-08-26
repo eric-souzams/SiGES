@@ -1,3 +1,12 @@
 <?php
+    include('./template/header.php');
+    include('./template/left.php');
+?>
 
-echo 'alou';
+<main class="content">
+    
+</main>
+
+<?php
+    include('./template/footer.php');
+?>
