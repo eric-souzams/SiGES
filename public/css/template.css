@@ -129,15 +129,73 @@ aside.sidebar .menu li.nav-item:hover {
     background-color: rgba(0, 0, 0, .1);
 }
 
-
 body.hide-sidebar aside.sidebar {
     display: none;
 }
 
+aside.sidebar .sidebar-widgets {
+    position: sticky;
+    bottom: 15px;
+}
 
+aside.sidebar .sidebar-widget {
+    display: flex;
+    align-items: center;
+}
+
+aside.sidebar .sidebar-widget .icon {
+    margin: 2px 15px 2px 0;
+}
+
+aside.sidebar .sidebar-widget .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.division {
+    widows: 80%;
+    border: solid 1px #eee;
+}
+
+aside.sidebar .info .main {
+    font-size: 1.6rem;
+    font-weight: 500;
+}
 
 main.content {
     grid-area: content;
+    background-color: #fff;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, .2);
+}
+
+main.content .content-title {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+main.content .content-title h1 {
+    font-size: 1.6rem;
+    color: #444;
+    font-weight: 300;
+    margin: 0;
+}
+
+main.content .content-title h2 {
+    font-size: 1.1rem;
+    color: #999;
+    font-weight: 300;
+    margin: 0;
+}
+
+.record {
+    font-size: 2rem;
 }
 
 footer.footer {
