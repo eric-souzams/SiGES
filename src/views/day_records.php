@@ -1,33 +1,26 @@
-<?php
-    // var_dump($_SESSION['USER']); 
-?>
-
 <main class="content">
-    <div class="content-title mb-4">
-        <i class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-            </svg>
-        </i>
-        <div>
-            <h1>Registrar Ponto</h1>
-            <h2>Mantenha seu ponto consistente!</h2>
-        </div>
-    </div>
+    <?php
+        renderTitle(
+            'Registrar Ponto',
+            'Mantenha seu ponto consistente!',
+            'check'
+        );
+        include(TEMPLATE_PATH . '/messages.php');
+    ?>
 
     <div class="card">
         <div class="card-header">
-            <h3>10 de Janeiro de 2028</h3>
-            <p class="mb-0">Os batimentos efetuados hoje</p>
+            <h3><?= $today ?></h3>
+            <p class="mb-0">Batimentos de hoje:</p>
         </div>
         <div class="card-body">
             <div class="d-flex m-3 justify-content-around">
-                <span class="record">Entrada 1: --:--</span>
-                <span class="record">Saida 1: --:--</span>
+                <span class="record">Entrada 1: <?= $records['time1'] ?? '----' ?></span>
+                <span class="record">Saida 1: <?= $records['time2'] ?? '----' ?></span>
             </div>
             <div class="d-flex m-3 justify-content-around">
-                <span class="record">Entrada 2: --:--</span>
-                <span class="record">Saida 2: --:--</span>
+                <span class="record">Entrada 2: <?= $records['time3'] ?? '----' ?></span>
+                <span class="record">Saida 2: <?= $records['time3'] ?? '----' ?></span>
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">

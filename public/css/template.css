@@ -94,6 +94,12 @@ header.header .dropdown-content a {
     font-size: 1rem;
 }
 
+header.header .avatar {
+    height: 60%;
+    border-radius: 50%;
+    margin: 0 15px 0 10px;
+}
+
 aside.sidebar {
     grid-area: sidebar;
     display: flex;
@@ -193,6 +199,11 @@ main.content .content-title h2 {
     font-weight: 300;
     margin: 0;
 }
+
+main.content .icon {
+    margin-right: 15px;
+}
+
 
 .record {
     font-size: 2rem;
