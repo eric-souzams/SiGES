@@ -1,6 +1,7 @@
 <?php
 
-class WorkingHours extends Model {
+class WorkingHours extends Model
+{
 
     protected static $table = "working_hours";
     protected static $columns = [
@@ -14,19 +15,18 @@ class WorkingHours extends Model {
         'worked_time',
     ];
 
-    public function loadByUserAndDate($userId, $workDate) {
+    public function loadByUserAndDate($userId, $workDate)
+    {
         $result = $this->findByUserAndDate($userId, $workDate);
 
-        if(!$result) {
-            $result = new WorkingHours();
-            $result->loadData([
+        if (!$result) {
+            $result = [
                 'user_id' => $userId,
                 'work_date' => $workDate,
                 'worked_time' => 0
-            ]);
+            ];
         }
 
         return $result;
     }
-
 }

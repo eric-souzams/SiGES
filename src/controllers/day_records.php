@@ -11,9 +11,9 @@ $today = str_replace('a', "A", $today);
 
 $user = $_SESSION['USER'];
 $model =  new WorkingHours();
-$records = $model->loadByUserAndDate($user['id'], date('Y-m-d'));
+$userRecords = $model->loadByUserAndDate($user['id'], date('Y-m-d'));
 
 loadTemplateView('day_records', [
     'today' => $today,
-    'records' => $records
+    'records' => $userRecords
     ]);

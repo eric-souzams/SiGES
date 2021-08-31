@@ -60,6 +60,7 @@ function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $
     }
 }
 
+populateWorkingHours(1, date('Y-m-1'), 70, 20, 10);
 populateWorkingHours(2, date('Y-m-1'), 70, 20, 10);
 populateWorkingHours(3, date('Y-m-1'), 20, 60, 20);
 populateWorkingHours(4, date('Y-m-1'), 40, 20, 40);

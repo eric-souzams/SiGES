@@ -31,7 +31,6 @@ class Model extends Database
     {
         try {
             $query = "SELECT * FROM " . static::$table . " WHERE user_id = :userId AND work_date = :date";
-            //SELECT * FROM working_hours WHERE user_id = 1 and work_date = '2021-08-30';
 
             $result = $this->connection->prepare($query);
             $result->bindParam(':userId', $userId, PDO::PARAM_INT);
