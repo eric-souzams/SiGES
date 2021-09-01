@@ -53,17 +53,17 @@ function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $
             $columns = array_merge($columns, $template);
             $workingHours = new WorkingHours();
             $workingHours->loadData($columns);
-            $workingHours->save();
+            $workingHours->insert();
         }
         $currentDate = getNextDay($currentDate)->format('Y-m-d');
         $columns['work_date'] = $currentDate;
     }
 }
 
-populateWorkingHours(1, date('Y-m-1'), 70, 20, 10);
-populateWorkingHours(2, date('Y-m-1'), 70, 20, 10);
-populateWorkingHours(3, date('Y-m-1'), 20, 60, 20);
-populateWorkingHours(4, date('Y-m-1'), 40, 20, 40);
-populateWorkingHours(5, date('Y-m-1'), 60, 20, 20);
+populateWorkingHours(1, date('Y-m-j'), 30, 20, 50);
+populateWorkingHours(2, date('Y-m-j'), 70, 20, 10);
+populateWorkingHours(3, date('Y-m-j'), 20, 60, 20);
+populateWorkingHours(4, date('Y-m-j'), 40, 20, 40);
+populateWorkingHours(5, date('Y-m-j'), 60, 20, 20);
 
 echo 'Tudo certo';

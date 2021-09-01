@@ -15,16 +15,16 @@
         </div>
         <div class="card-body">
             <div class="d-flex m-3 justify-content-around">
-                <span class="record">Entrada 1: <?= $records['time1'] ?? '--:--:--' ?></span>
-                <span class="record">Saida 1: <?= $records['time2'] ?? '--:--:--' ?></span>
+                <span class="record">Entrada 1: <?= @$records->getValue('time1') ?? '--:--:--' ?></span>
+                <span class="record">Saida 1: <?= @$records->getValue('time2') ?? '--:--:--' ?></span>
             </div>
             <div class="d-flex m-3 justify-content-around">
-                <span class="record">Entrada 2: <?= $records['time3'] ?? '--:--:--' ?></span>
-                <span class="record">Saida 2: <?= $records['time4'] ?? '--:--:--' ?></span>
+                <span class="record">Entrada 2: <?= @$records->getValue('time3') ?? '--:--:--' ?></span>
+                <span class="record">Saida 2: <?= @$records->getValue('time4') ?? '--:--:--' ?></span>
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
-            <a href="#" class="btn btn-success btn-lg">
+            <a href="innout.php" class="btn btn-success btn-lg">
                 <i class="mr-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
                         <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z" />

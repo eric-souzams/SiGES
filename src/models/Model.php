@@ -38,17 +38,22 @@ class Model extends Database
             $result->execute();
             
             $data = $result->fetch(PDO::FETCH_ASSOC);
-            if (!isset($data)) {
+
+            if(!$data) {
                 return false;
             }
-            
-            return $data;
+
+            $calledClass = get_called_class();
+            $class = new $calledClass();
+            $class->loadData($data);
+
+            return $class;
         } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
 
-    public function save()
+    public function insert()
     {
         try {
             $query = "INSERT INTO " . static::$table
@@ -57,13 +62,31 @@ class Model extends Database
                 $query .= static::getFormatedValue($this->getValue($column)) . ",";
             }
             $query[strlen($query) - 1] = ')';
+            
+            $result = $this->connection->prepare($query);
+            $result->execute();
+            
+            $id = $this->connection->lastInsertId('id');
+
+            // $this->$id = $id;
+            $this->setValue('id', $id);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function update() {
+        try {
+            $query = "UPDATE " . static::$table . " SET ";
+            foreach(static::$columns as $column) {
+                $query .= " ${column} = " . static::getFormatedValue($this->getValue($column)) . ",";
+            }
+            $query[strlen($query) - 1] = ' ';
+            $query .= "WHERE id = {$this->getValue('id')}"; 
 
             $result = $this->connection->prepare($query);
             $result->execute();
-
-            $id = $this->connection->lastInsertId();
-            $this->id = $id;
-        } catch (PDOException $e) {
+        } catch(PDOException $e) {
             die($e->getMessage());
         }
     }
