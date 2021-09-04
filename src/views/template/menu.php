@@ -65,8 +65,8 @@
                 </svg>
             </i>
             <div class="info">
-                <span class="main text-primary">
-                    04:25
+                <span class="main text-primary" <?= $activeClock === 'workedInterval' ? 'active-clock' : '' ?>>
+                    <?= $workedInterval ?>
                 </span>
                 <span class="label text-muted">
                     Horas Trabalhadas
@@ -84,8 +84,8 @@
                 </svg>
             </i>
             <div class="info">
-                <span class="main text-danger">
-                    18:00
+                <span class="main text-danger" <?= $activeClock === 'exitTime' ? 'active-clock' : '' ?> >
+                    <?= $exitTime ?>
                 </span>
                 <span class="label text-muted">
                     Hora de Saída
