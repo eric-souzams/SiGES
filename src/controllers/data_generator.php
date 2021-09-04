@@ -66,4 +66,4 @@ populateWorkingHours(3, date('Y-m-j'), 20, 60, 20);
 populateWorkingHours(4, date('Y-m-j'), 40, 20, 40);
 populateWorkingHours(5, date('Y-m-j'), 60, 20, 20);
 
-echo 'Tudo certo';
+header('location: day_records.php');
