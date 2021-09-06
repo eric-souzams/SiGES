@@ -62,6 +62,8 @@ class WorkingHours extends Model
         }
 
         $this->setValue($timeColumn, $time);
+        $this->setValue('worked_time', getSecondsFromDateInterval($this->getWorkedInterval()));
+
         if ($this->getValue('id')) {
             $this->update();
         } else {
@@ -124,5 +126,32 @@ class WorkingHours extends Model
         $this->getValue('time4') ? array_push($times, getDateFromString($this->getValue('time4'))) : array_push($times, null);
 
         return $times;
+    }
+
+    public function getBalance()
+    {
+        if(!$this->getValue('time1') && !isPastWorkday($this->getValue('work_date'))) {
+            return '';
+        }
+
+        if($this->getValue('worked_time') == DAILY_TIME) {
+            return '';
+        }
+
+        $balance = $this->getValue('worked_time') - DAILY_TIME;
+        $balanceString = getTimeStringFromSeconds(abs($balance));
+        $sign = $this->getValue('worked_time') >= DAILY_TIME ? '+' : '-';
+        return "{$sign}{$balanceString}";
+    }
+
+    public function getMonthlyReport($userId, $date)
+    {
+        $startDate = getFisrtDayOfMonth($date)->format('Y-m-d');
+        $endDate = getLastDayOfMonth($date)->format('Y-m-d'); 
+
+        $mWorkingHours = new WorkingHours();
+        $result = $mWorkingHours->findByUser($userId, $startDate, $endDate);
+
+        return $result;
     }
 }

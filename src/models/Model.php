@@ -68,7 +68,7 @@ class Model extends Database
             
             $id = $this->connection->lastInsertId('id');
 
-            // $this->$id = $id;
+            //$this->$id = $id;
             $this->setValue('id', $id);
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -103,6 +103,34 @@ class Model extends Database
             $data = $result->fetch(PDO::FETCH_ASSOC);
             if (!isset($data)) {
                 return false;
+            }
+
+            return $data;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function findByUser($id, $date1, $date2)
+    {
+        try {
+            $query = "SELECT * FROM " . static::$table . "  WHERE user_id = :id AND work_date BETWEEN :date1 and :date2";
+
+            $result = $this->connection->prepare($query);
+            $result->bindParam(':id', $id, PDO::PARAM_INT);
+            $result->bindParam(':date1', $date1, PDO::PARAM_STR);
+            $result->bindParam(':date2', $date2, PDO::PARAM_STR);
+            $result->execute();
+
+            $data = [];
+            if ($result) {
+                $calledClass = get_called_class();
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    $class = new $calledClass();
+                    $class->loadData($row);
+                    //array_push($data, $class);
+                    $data[$class->getValue('work_date')] = $class;
+                }
             }
 
             return $data;

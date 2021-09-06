@@ -1,7 +1,7 @@
 <?php
 
+setlocale(LC_ALL, 'pt_BR.utf-8', 'portuguese.utf-8');
 date_default_timezone_set('Brazil/East');
-setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'portuguese'); 
 
 //consts utils
 define('DAILY_TIME', 60 * 60 * 8);
@@ -23,6 +23,7 @@ require_once(realpath(CONFIG_PATH) . '/utils.php');
 
 require_once(realpath(MODEL_PATH) . '/Model.php');
 require_once(realpath(MODEL_PATH) . '/User.php');
+require_once(realpath(MODEL_PATH) . '/WorkingHours.php');
 
 require_once(realpath(EXCEPTION_PATH) . '/AppException.php');
 require_once(realpath(EXCEPTION_PATH) . '/ValidationException.php');
