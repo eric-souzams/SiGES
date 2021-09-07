@@ -5,6 +5,7 @@ requireValidSession();
 
 $date = (new DateTime())->getTimeStamp();
 $today = strftime('%d de %B de %Y', $date);
-$today = str_replace('a', "A", $today);
+$today = ucwords($today);
+$today = str_replace('De', 'de', $today);
 
 loadTemplateView('day_records', ['today' => $today]);

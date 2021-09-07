@@ -6,4 +6,5 @@
 
 <p align="center">
   <img src="./public/assets/screens/screen1.png" />
+  <img src="./public/assets/screens/screen2.png" />
 </p>
