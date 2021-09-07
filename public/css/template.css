@@ -218,3 +218,27 @@ footer.footer {
     color: #fff;
     background-color: #222;
 }
+
+.summary-boxes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.summary-box {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+
+    color: white;
+
+    min-width: 200px;
+}
+ .summary-boxes .title {
+     font-size: 1.1rem;
+ }

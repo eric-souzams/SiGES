@@ -13,4 +13,9 @@ class User extends Model {
         'is_admin'
     ];
 
+    public function getActiveUsersCount()
+    {
+        return $this->getUsersCount();
+    }
+
 }

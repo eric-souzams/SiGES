@@ -140,6 +140,46 @@ class Model extends Database
         }
     }
 
+    public function findWorkedTime($date1, $date2)
+    {
+        try {
+            $query = "SELECT SUM(worked_time) AS sum FROM " . static::$table . " WHERE work_date BETWEEN :date1 and :date2";
+
+            $result = $this->connection->prepare($query);
+            $result->bindParam(':date1', $date1, PDO::PARAM_STR);
+            $result->bindParam(':date2', $date2, PDO::PARAM_STR);
+            $result->execute();
+
+            $data = $result->fetch(PDO::FETCH_ASSOC);
+            if (!isset($data)) {
+                return false;
+            }
+
+            return $data['sum'];
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getUsersCount()
+    {
+        try {
+            $query = "SELECT COUNT(*) AS count FROM users WHERE end_date IS NULL";
+
+            $result = $this->connection->prepare($query);
+            $result->execute();
+
+            $data = $result->fetch(PDO::FETCH_ASSOC);
+            if (!isset($data)) {
+                return false;
+            }
+
+            return $data['count'];
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getAllUsers()
     {
         try {
@@ -175,6 +215,27 @@ class Model extends Database
                     $class->loadData($row);
                     array_push($data, $class);
                 }
+            }
+
+            return $data;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function findAbsentUsers($today)
+    {
+        try {
+            $query = "SELECT name FROM users WHERE end_date IS NULL AND id NOT IN 
+                    ( SELECT user_id FROM working_hours WHERE work_date = :today AND time1 IS NOT NULL)";
+
+            $result = $this->connection->prepare($query);
+            $result->bindParam(':today', $today, PDO::PARAM_STR);
+            $result->execute();
+
+            $data = [];
+            while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                array_push($data, $row['name']);
             }
 
             return $data;

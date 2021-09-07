@@ -144,6 +144,26 @@ class WorkingHours extends Model
         return "{$sign}{$balanceString}";
     }
 
+    public function getAbsentUsers()
+    {
+        $today = new DateTime();
+        $mWorkingHours = new WorkingHours();
+        $result = $mWorkingHours->findAbsentUsers($today->format('Y-m-d'));
+
+        return $result;
+    }
+
+    public function getWorkedTimeInMonth($date)
+    {
+        $startDate = getFisrtDayOfMonth($date)->format('Y-m-d');
+        $endDate = getLastDayOfMonth($date)->format('Y-m-d');
+
+        $mWorkingHours = new WorkingHours();
+        $result = $mWorkingHours->findWorkedTime($startDate, $endDate);
+
+        return $result;
+    }
+
     public function getMonthlyReport($userId, $date)
     {
         $startDate = getFisrtDayOfMonth($date)->format('Y-m-d');
