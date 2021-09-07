@@ -36,10 +36,10 @@ class Model extends Database
             $result->bindParam(':userId', $userId, PDO::PARAM_INT);
             $result->bindParam(':date', $date, PDO::PARAM_STR);
             $result->execute();
-            
+
             $data = $result->fetch(PDO::FETCH_ASSOC);
 
-            if(!$data) {
+            if (!$data) {
                 return false;
             }
 
@@ -62,10 +62,10 @@ class Model extends Database
                 $query .= static::getFormatedValue($this->getValue($column)) . ",";
             }
             $query[strlen($query) - 1] = ')';
-            
+
             $result = $this->connection->prepare($query);
             $result->execute();
-            
+
             $id = $this->connection->lastInsertId('id');
 
             //$this->$id = $id;
@@ -75,18 +75,19 @@ class Model extends Database
         }
     }
 
-    public function update() {
+    public function update()
+    {
         try {
             $query = "UPDATE " . static::$table . " SET ";
-            foreach(static::$columns as $column) {
+            foreach (static::$columns as $column) {
                 $query .= " ${column} = " . static::getFormatedValue($this->getValue($column)) . ",";
             }
             $query[strlen($query) - 1] = ' ';
-            $query .= "WHERE id = {$this->getValue('id')}"; 
+            $query .= "WHERE id = {$this->getValue('id')}";
 
             $result = $this->connection->prepare($query);
             $result->execute();
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
@@ -131,6 +132,25 @@ class Model extends Database
                     //array_push($data, $class);
                     $data[$class->getValue('work_date')] = $class;
                 }
+            }
+
+            return $data;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getAllUsers()
+    {
+        try {
+            $query = "SELECT id, name FROM " . static::$table;
+
+            $result = $this->connection->prepare($query);
+            $result->execute();
+
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            if (!isset($data)) {
+                return false;
             }
 
             return $data;
