@@ -242,3 +242,14 @@ footer.footer {
  .summary-boxes .title {
      font-size: 1.1rem;
  }
+
+ table .actions {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+ }
+
+ .new-user {
+    display: flex;
+    justify-content: center;
+ }

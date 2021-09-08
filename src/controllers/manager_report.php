@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-requireValidSession();
+requireValidSession(true);
 
 $mUser = new User();
 $mWorkingHours = new WorkingHours();

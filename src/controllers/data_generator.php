@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+requireValidSession(true);
+
 function getDayTemplateByOdds($regularRate, $extraRate, $lazyRate)
 {
     $regularDayTemplate = [

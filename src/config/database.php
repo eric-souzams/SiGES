@@ -15,6 +15,7 @@ abstract class Database {
                 $env['username'], 
                 $env['password']
             );
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
             return $this->connection;
         } catch (PDOException $e) {

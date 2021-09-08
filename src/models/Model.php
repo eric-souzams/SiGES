@@ -7,6 +7,19 @@ class Model extends Database
     protected static $columns = [];
     protected $values = [];
 
+    public function deleteById($id)
+    {
+        try {
+            $query = "DELETE FROM " . static::$table . " WHERE id = :id";
+
+            $result = $this->connection->prepare($query);
+            $result->bindParam(':id', $id, PDO::PARAM_INT);
+            $result->execute();
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function findByEmail(string $email)
     {
         try {
@@ -68,10 +81,10 @@ class Model extends Database
 
             $id = $this->connection->lastInsertId('id');
 
-            //$this->$id = $id;
             $this->setValue('id', $id);
         } catch (PDOException $e) {
-            die($e->getMessage());
+            throw new Exception($e);
+            //die($e->getMessage());
         }
     }
 
@@ -199,6 +212,25 @@ class Model extends Database
         }
     }
 
+    public function findAllUsers()
+    {
+        try {
+            $query = "SELECT * FROM " . static::$table;
+
+            $result = $this->connection->prepare($query);
+            $result->execute();
+
+            $data = $result->fetchAll(PDO::FETCH_ASSOC);
+            if (!isset($data)) {
+                return false;
+            }
+
+            return $data;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function findAll()
     {
         try {
@@ -234,7 +266,7 @@ class Model extends Database
             $result->execute();
 
             $data = [];
-            while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                 array_push($data, $row['name']);
             }
 
@@ -248,19 +280,29 @@ class Model extends Database
     {
         if ($data) {
             foreach ($data as $key => $value) {
-                $this->values[$key] = $value;
+                $cleanValue = $value;
+
+                $cleanValue = strip_tags(trim($cleanValue));
+                $cleanValue = htmlentities($cleanValue, ENT_NOQUOTES);
+
+                $this->values[$key] = $cleanValue;
             }
         }
     }
 
     public function getValue($key)
     {
-        return $this->values[$key];
+        return @$this->values[$key];
     }
 
     public function setValue($key, $value)
     {
         $this->values[$key] = $value;
+    }
+
+    public function getValues()
+    {
+        return $this->values;
     }
 
     static function getFormatedValue($value)

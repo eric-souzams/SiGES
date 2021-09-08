@@ -35,13 +35,15 @@
         </div>
     </div>
 
-    <form class="mt-5" action="innout.php" method="post">
-        <div class="input-group no-border">
-            <input class="form-control" type="text" name="forcedTime" placeholder="Para simular um batimento use o padrão: 00:00:00">
-            <button class="btn btn-danger ml-1">
-                Simular Ponto
-            </button>
-        </div>
-    </form>
+    <?php if ($is_admin) : ?>
+        <form class="mt-5" action="innout.php" method="post">
+            <div class="input-group no-border">
+                <input class="form-control" type="text" name="forcedTime" placeholder="Para simular um batimento use o padrão: 00:00:00">
+                <button class="btn btn-danger ml-1">
+                    Simular Ponto
+                </button>
+            </div>
+        </form>
+    <?php endif ?>
 
 </main>

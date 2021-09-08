@@ -22,6 +22,7 @@
                     Relatório Mensal
                 </a>
             </li>
+            <?php if($user['is_admin']): ?>
             <li class="nav-item">
                 <a href="manager_report.php">
                     <i class="mr-1">
@@ -33,7 +34,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href=".php">
+                <a href="users.php">
                     <i class="mr-1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
                             <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
@@ -55,6 +56,7 @@
                     Gerar Dados
                 </a>
             </li>
+            <?php endif ?>
         </ul>
     </nav>
     <div class="sidebar-widgets">
