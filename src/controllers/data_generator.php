@@ -55,6 +55,7 @@ function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $
             $columns = array_merge($columns, $template);
             $workingHours = new WorkingHours();
             $workingHours->loadData($columns);
+            $workingHours->setValue('id', null);
             $workingHours->insert();
         }
         $currentDate = getNextDay($currentDate)->format('Y-m-d');
@@ -63,9 +64,5 @@ function populateWorkingHours($userId, $initialDate, $regularRate, $extraRate, $
 }
 
 populateWorkingHours(1, date('Y-m-1'), 40, 30, 30);
-populateWorkingHours(2, date('Y-m-1'), 40, 30, 30);
-populateWorkingHours(3, date('Y-m-1'), 40, 30, 30);
-populateWorkingHours(4, date('Y-m-1'), 40, 30, 30);
-populateWorkingHours(5, date('Y-m-1'), 40, 30, 30);
 
 header('location: day_records.php');

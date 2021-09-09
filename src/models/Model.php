@@ -84,7 +84,6 @@ class Model extends Database
             $this->setValue('id', $id);
         } catch (PDOException $e) {
             throw new Exception($e);
-            //die($e->getMessage());
         }
     }
 
