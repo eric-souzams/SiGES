@@ -308,6 +308,8 @@ class Model extends Database
     {
         if (is_null($value)) {
             return "null";
+        } elseif ($value === '') {
+            return "null";
         } elseif (gettype($value) === 'string') {
             return "'${value}'";
         } else {

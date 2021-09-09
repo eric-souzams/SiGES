@@ -15,12 +15,12 @@
         </div>
         <div class="card-body">
             <div class="d-flex m-3 justify-content-around">
-                <span class="record">Entrada 1: <?= @$workingHours->getValue('time1') ?? '--:--:--' ?></span>
-                <span class="record">Saída 1: <?= @$workingHours->getValue('time2') ?? '--:--:--' ?></span>
+                <span class="record">Entrada 1: <?= $workingHours->getValue('time1') != null ? $workingHours->getValue('time1') : '--:--:--' ?></span>
+                <span class="record">Saída 1: <?= $workingHours->getValue('time2') != null ? $workingHours->getValue('time2') : '--:--:--' ?></span>
             </div>
             <div class="d-flex m-3 justify-content-around">
-                <span class="record">Entrada 2: <?= @$workingHours->getValue('time3') ?? '--:--:--' ?></span>
-                <span class="record">Saída 2: <?= @$workingHours->getValue('time4') ?? '--:--:--' ?></span>
+                <span class="record">Entrada 2: <?= $workingHours->getValue('time3') != null ? $workingHours->getValue('time3') : '--:--:--' ?></span>
+                <span class="record">Saída 2: <?= $workingHours->getValue('time4') != null ? $workingHours->getValue('time4') : '--:--:--' ?></span>
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center">
