@@ -10,7 +10,7 @@
     ?>
 
     <form action="#" method="post">
-        <input type="hidden" name="id" value="<?= $id ?>">
+        <input type="hidden" name="id" value="<?= isset($id) ? $id : '' ?>">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Nome</label>

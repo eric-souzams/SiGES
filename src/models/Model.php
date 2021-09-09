@@ -77,6 +77,10 @@ class Model extends Database
             $query[strlen($query) - 1] = ')';
 
             $result = $this->connection->prepare($query);
+
+            print_r($result);
+            //exit();
+
             $result->execute();
 
             $id = $this->connection->lastInsertId('id');

@@ -14,6 +14,9 @@ if (count($_POST) === 0 && isset($_GET['update'])) {
     try {
         $loadUser = new User();
         $loadUser->loadData($_POST);
+
+        print_r($loadUser->getValues());
+        //exit();
         
         if ($loadUser->getValue('id')) {
             $loadUser->update();
